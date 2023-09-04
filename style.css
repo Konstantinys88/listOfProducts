@@ -1,0 +1,76 @@
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0 auto;
+    max-width: 1000px;
+    text-align: center;
+
+    padding-top: 50px;
+}
+
+
+.header__list {
+    padding: 15px;
+    background-color: rgb(5, 83, 35);
+    color: aliceblue;
+    border-radius: 15px;
+    border: 2px black solid;
+}
+
+.list__li {
+    list-style-type: none;
+    padding: 4px;
+    background-color: rgb(5, 83, 35);
+    color: aliceblue;
+    border-radius: 10px;
+    border: 2px black solid;
+    margin-top: 3px;
+    position: relative;
+}
+
+.deleteItem {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 50px;
+}
+
+.formSection {
+    margin-top: 10px;
+    background-color: rgb(5, 83, 35);
+    color: aliceblue;
+    border-radius: 10px;
+    border: 2px black solid;
+    margin-top: 3px;
+    padding: 5px;
+}
+
+.input__list {
+    padding: 4px;
+    border: 2px black solid;
+    border-radius: 10px
+}
+
+.button__list {
+    padding: 4px;
+    border: 2px black solid;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: aquamarine;
+    }
+}
