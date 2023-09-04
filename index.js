@@ -3,8 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const arrList = ['Хлеб', 'Вода', 'Арбуз', 'Доширак', 'Кока-кола'];
 
-    // localArr = localStorage.setItem(arrList, JSON.stringify(arrList));
-    // array = JSON.parse(localStorage.getItem("localArr"));
+    // localStorage.setItem('arrList', JSON.stringify(arrList));
+    // array = JSON.parse(localStorage.getItem("arrList"));
+    // console.log(array);
+
 
     class List {
         constructor(arr) {
@@ -50,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (indexBtn === index) { //проверка совпадает ли элемент списка с кнопкой
                                 this.arr.splice(indexBtn, 1); //удаляет из массива 
                                 item.remove(); // удаляет со страницы
+
                             }
                         })
                     }
@@ -115,6 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
 //что осталось сделать
 //гдето сохранять данные localstorega ?:
 //сортировку при нажатии на crosOut
+
+
+// можгл попробовать без класаса только функции
 
 
 
