@@ -112,4 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+//что осталось сделать
+//гдето сохранять данные localstorega ?:
+//сортировку при нажатии на crosOut
+
+
 
