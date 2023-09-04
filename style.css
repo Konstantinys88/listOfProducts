@@ -73,17 +73,17 @@ body {
 }
 
 .input__list {
-    padding: 4px;
+    width: 300px;
+    padding: 15px;
     border: 2px black solid;
-    border-radius: 10px
+    border-radius: 10px;  
 }
 
 .button__list {
-    padding: 4px;
+    padding: 15px;
     border: 2px black solid;
     border-radius: 10px;
     cursor: pointer;
-
     &:hover {
         background-color: aquamarine;
     }
