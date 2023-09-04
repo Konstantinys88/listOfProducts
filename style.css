@@ -37,6 +37,8 @@ body {
     border: 2px black solid;
     margin-top: 3px;
     position: relative;
+
+    height: 30px;
 }
 
 .deleteItem {
@@ -47,6 +49,16 @@ body {
     position: absolute;
     right: 50px;
 }
+
+.crossOut {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 70px;
+}
+
 
 .formSection {
     margin-top: 10px;
@@ -73,4 +85,11 @@ body {
     &:hover {
         background-color: aquamarine;
     }
+}
+
+.lineThrough {
+    text-decoration: 2px line-through;
+    text-decoration-color: red;
+    /* text-decoration-style: wavy; */
+
 }
