@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 elemementLi.classList.add('list__li');
                 elemementLi.textContent = item.text;
 
+                if(item.status) {
+                    elemementLi.classList.add('lineThrough');
+                }
+
                 const btnDelete = document.createElement('button');
                 btnDelete.textContent = '✘';
                 btnDelete.classList.add('deleteItem');
@@ -117,35 +121,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     arrList.forEach((itemArr, indexArr) => {
                         if (indexBtn == indexArr) {
                             itemArr.status = true
-                            saveLocalStorage();
-                        }
-                        if (itemArr.status) {
                             element[indexArr].classList.add('lineThrough');
-                            // console.log(element[indexArr])
                             saveLocalStorage();
+
                         }
                     });
                 }
             });
         });
     }
-
-
-    function addClass() {
-        arrList.forEach((item, index) => {
-            if (item.status) {
-
-            }
-        })
-
-    }
-
-    addClass();
-
-    // console.log(arrList)
-
-
-
 
 
     render();
