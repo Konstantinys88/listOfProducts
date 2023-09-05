@@ -32,7 +32,7 @@ body {
 
 .list__li {
     list-style-type: none;
-    padding: 4px 15px;
+    padding: 9px 15px;
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
     border-radius: 10px;
@@ -40,7 +40,8 @@ body {
     margin-top: 3px;
     position: relative;
     text-align: left;
-    height: 30px;
+    height: 40px;
+    
 }
 
 .deleteItem {

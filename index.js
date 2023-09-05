@@ -1,54 +1,83 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 
-    const arrList = ['Хлеб', 'Вода', 'Арбуз', 'Доширак', 'Кока-кола'];
+    let arrList = [];
 
-    
-    localStorage.setItem('arrList', JSON.stringify(arrList));
-    array = JSON.parse(localStorage.getItem("arrList"));
-    // console.log(array);
+    function saveLocalStorage() {
+        localStorage.setItem('arrList', JSON.stringify(arrList));
+    }
 
-
+    if (localStorage.getItem('arrList')) {
+        arrList = JSON.parse(localStorage.getItem("arrList"));
+    }
 
     function render(arr) {
-        arr.forEach(item => {
+        if (arr.length > 0) {
+            arr.forEach(item => {
+                const elemementLi = document.createElement('li');
+                elemementLi.classList.add('list__li');
+                elemementLi.textContent = item;
+
+                const btnDelete = document.createElement('button');
+                btnDelete.textContent = '✘';
+                btnDelete.classList.add('deleteItem');
+                elemementLi.append(btnDelete);
+
+                const btnCrosOut = document.createElement('button');
+                btnCrosOut.textContent = '✔';
+                btnCrosOut.classList.add('crossOut');
+                elemementLi.append(btnCrosOut);
+
+                const parentElement = document.querySelector('.list__ul');
+                parentElement.append(elemementLi);
+            });
+        } else {
             const elemementLi = document.createElement('li');
             elemementLi.classList.add('list__li');
-            elemementLi.textContent = item;
-
-            const btnDelete = document.createElement('button');
-            btnDelete.textContent = '✘';
-            btnDelete.classList.add('deleteItem');
-            elemementLi.append(btnDelete);
-
-            const btnCrosOut = document.createElement('button');
-            btnCrosOut.textContent = '✔';
-            btnCrosOut.classList.add('crossOut');
-            elemementLi.append(btnCrosOut);
+            elemementLi.textContent = 'Список пуст ☹';
 
             const parentElement = document.querySelector('.list__ul');
             parentElement.append(elemementLi);
-        });
+        }
 
-        deleteItem(arr);
+        deleteItem();
         crosOut();
     }
 
 
-    function deleteItem(arr) {
-        const deleteItem = document.querySelectorAll('.deleteItem'); //получил кнопки
-        const element = document.querySelectorAll('.list__li'); // получил элементы списка
+    function addItem() {
+        const input = document.querySelector('.input__list'); //получил инпут
+        const btn = document.querySelector('.button__list'); //получил кнопку
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const element = document.querySelectorAll('.list__li');
+            element.forEach(item => item.remove());
+            if (input.value != '') {
+                arrList.push(input.value);
+                saveLocalStorage();
+            }
+            render(arrList);
+            input.value = '';
+        });
+    }
+
+
+    function deleteItem() {
+        const deleteItem = document.querySelectorAll('.deleteItem');
+        const element = document.querySelectorAll('.list__li');
         deleteItem.forEach((item, indexBtn) => {
-            item.addEventListener('click', (e) => { //обработчик событий
-                e.preventDefault(); //отмена стандартного поведения
-                if (e.target.classList.contains('deleteItem')) { //проверка есть ли у кнопки нужный класс
-                    element.forEach((item, index) => { //перебор элементов списка
-                        if (indexBtn === index) { //проверка совпадает ли элемент списка с кнопкой
-
-                            arr.splice(indexBtn, 1); //удаляет из массива 
-                            item.remove(); // удаляет со страницы
-
-                            
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (e.target.classList.contains('deleteItem')) {
+                    element.forEach((item, index) => {
+                        if (indexBtn == index) {
+                            // console.log(indexBtn, index);
+                            arrList.splice(index, 1);
+                            saveLocalStorage();
+                            item.remove();
+                            // if (element.length == 0) {
+                            //     render();
+                            // }
                         }
                     });
                 }
@@ -56,22 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function addItem(arr) {
-        const input = document.querySelector('.input__list'); //получил инпут
-        const btn = document.querySelector('.button__list'); //получил кнопку
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
 
-            const element = document.querySelectorAll('.list__li');
-            element.forEach(item => item.remove());
-            if (input.value != '') {
-                arr.push(input.value);
-            }
 
-            render(arr);
-            input.value = '';
-        });
-    }
 
     function crosOut() {
         const crosOutBtn = document.querySelectorAll('.crossOut');
@@ -82,8 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 if (e.target.classList.contains('crossOut')) {
                     element.forEach((itemElem, indexElem) => {
-                        if (indexBtn === indexElem) {
-                            itemElem.classList.toggle('lineThrough');
+                        if (indexBtn === indexElem && !itemElem.classList.contains('lineThrough')) {
+                            itemElem.classList.add('lineThrough');
                         }
                     });
                 }
@@ -92,18 +107,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    render(array);
-    addItem(array);
+    render(arrList);
+    addItem();
+
 
 });
 
 
-//что осталось сделать
-//гдето сохранять данные localstorega ?:
 //сортировку при нажатии на crosOut
 
 
-// можгл попробовать без класаса только функции
+
 
 
 
