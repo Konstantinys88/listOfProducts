@@ -44,12 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 const btnDelete = document.createElement('button');
-                btnDelete.textContent = '✘';
+                btnDelete.textContent = 'Удалить';
                 btnDelete.classList.add('deleteItem');
                 elemementLi.append(btnDelete);
 
                 const btnCrosOut = document.createElement('button');
-                btnCrosOut.textContent = '✔';
+                btnCrosOut.textContent = 'Вычеркнуть';
                 btnCrosOut.classList.add('crossOut');
                 elemementLi.append(btnCrosOut);
 
