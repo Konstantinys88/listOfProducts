@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-
     let arrList = [];
-
 
     /**
      * Функция записывает данные в localStorage
@@ -18,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         arrList = JSON.parse(localStorage.getItem("arrList"));
     }
 
-
     function sortArr() {
         arrList.forEach((item, index) => {
             if (item.status) {
@@ -30,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     sortArr();
-
 
     /**
      * Функция отрисовывает элементы из массива в виде списка на страницу
@@ -74,7 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-
+    /**
+     * Функция для добавления элемента
+     */
     function addItem() {
         const input = document.querySelector('.input__list');
         const btn = document.querySelector('.button__list'); 
@@ -101,6 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    /**
+     * Функция для удаления элемента
+     */
     function deleteItem() {
         const deleteItem = document.querySelectorAll('.deleteItem');
         const element = document.querySelectorAll('.list__li');
@@ -124,6 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    /**
+     * Функция для зачеркивания элемента
+     */
     function crosOut() {
         const crosOutBtn = document.querySelectorAll('.crossOut');
         const element = document.querySelectorAll('.list__li');
@@ -137,8 +141,12 @@ document.addEventListener('DOMContentLoaded', () => {
                            
                             itemArr.status = true
                             element[indexArr].classList.add('lineThrough');
+
+                            sortArr();
                             saveLocalStorage();
-                            // location.reload();
+
+                            element.forEach(item => item.remove())
+                            render();
 
                         }
                     });
@@ -150,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     render();
     addItem();
-    crosOut();
 
 });
 
