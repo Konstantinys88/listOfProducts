@@ -3,20 +3,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let arrList = [];
 
+    /**
+     * Функция записывает данные в localStorage
+     */
     function saveLocalStorage() {
         localStorage.setItem('arrList', JSON.stringify(arrList));
     }
 
+    /**
+     * Берет данные из localStorage и зписывает их в массив
+     */
     if (localStorage.getItem('arrList')) {
         arrList = JSON.parse(localStorage.getItem("arrList"));
     }
 
-    function render(arr) {
-        if (arr.length > 0) {
-            arr.forEach(item => {
+
+    /**
+     * Функция отрисовывает элементы из массива в виде списка на страницу
+     */
+    function render() {
+        if (arrList.length > 0) {
+            arrList.forEach(item => {
                 const elemementLi = document.createElement('li');
                 elemementLi.classList.add('list__li');
-                elemementLi.textContent = item;
+                elemementLi.textContent = item.text;
 
                 const btnDelete = document.createElement('button');
                 btnDelete.textContent = '✘';
@@ -50,10 +60,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = document.querySelector('.button__list'); //получил кнопку
         btn.addEventListener('click', (e) => {
             e.preventDefault();
+
             const element = document.querySelectorAll('.list__li');
             element.forEach(item => item.remove());
+
+            const newItem = {
+                text: input.value,
+                status: false,
+            }
+
             if (input.value != '') {
-                arrList.push(input.value);
+                arrList.push(newItem);
+                console.log(arrList)
+
                 saveLocalStorage();
             }
             render(arrList);
@@ -75,9 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             arrList.splice(index, 1);
                             saveLocalStorage();
                             item.remove();
-                            // if (element.length == 0) {
-                            //     render();
-                            // }
+                            if (element.length == 0) {
+                                render();
+                            }
                         }
                     });
                 }
@@ -107,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    render(arrList);
+    render();
     addItem();
 
 
