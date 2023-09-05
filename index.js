@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function render() {
         if (arrList.length > 0) {
             arrList.forEach(item => {
+
                 const elemementLi = document.createElement('li');
                 elemementLi.classList.add('list__li');
                 elemementLi.textContent = item.text;
@@ -60,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = document.querySelector('.button__list'); //получил кнопку
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-
             const element = document.querySelectorAll('.list__li');
             element.forEach(item => item.remove());
 
@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 saveLocalStorage();
             }
+
             render(arrList);
             input.value = '';
         });
@@ -105,8 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-
-
     function crosOut() {
         const crosOutBtn = document.querySelectorAll('.crossOut');
         const element = document.querySelectorAll('.list__li');
@@ -115,9 +114,15 @@ document.addEventListener('DOMContentLoaded', () => {
             itemBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 if (e.target.classList.contains('crossOut')) {
-                    element.forEach((itemElem, indexElem) => {
-                        if (indexBtn === indexElem && !itemElem.classList.contains('lineThrough')) {
-                            itemElem.classList.add('lineThrough');
+                    arrList.forEach((itemArr, indexArr) => {
+                        if (indexBtn == indexArr) {
+                            itemArr.status = true
+                            saveLocalStorage();
+                        }
+                        if (itemArr.status) {
+                            element[indexArr].classList.add('lineThrough');
+                            // console.log(element[indexArr])
+                            saveLocalStorage();
                         }
                     });
                 }
@@ -126,9 +131,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    function addClass() {
+        arrList.forEach((item, index) => {
+            if (item.status) {
+
+            }
+        })
+
+    }
+
+    addClass();
+
+    // console.log(arrList)
+
+
+
+
+
     render();
     addItem();
-
 
 });
 
