@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let arrList = [];
 
+
     /**
      * Функция записывает данные в localStorage
      */
@@ -18,18 +19,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    function sortArr() {
+        arrList.forEach((item, index) => {
+            if (item.status) {
+                arrList.push(item);
+                arrList.splice(index, 1);
+                // console.log(arrList)
+            }
+        })
+    }
+
+    sortArr();
+
+
     /**
      * Функция отрисовывает элементы из массива в виде списка на страницу
      */
     function render() {
         if (arrList.length > 0) {
-            arrList.forEach(item => {
+            arrList.forEach((item, index) => {
 
                 const elemementLi = document.createElement('li');
                 elemementLi.classList.add('list__li');
                 elemementLi.textContent = item.text;
 
-                if(item.status) {
+                if (item.status) {
                     elemementLi.classList.add('lineThrough');
                 }
 
@@ -57,12 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         deleteItem();
         crosOut();
+
     }
 
 
     function addItem() {
-        const input = document.querySelector('.input__list'); //получил инпут
-        const btn = document.querySelector('.button__list'); //получил кнопку
+        const input = document.querySelector('.input__list');
+        const btn = document.querySelector('.button__list'); 
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const element = document.querySelectorAll('.list__li');
@@ -74,9 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (input.value != '') {
-                arrList.push(newItem);
+                arrList.unshift(newItem);
                 console.log(arrList)
-
+                sortArr();
                 saveLocalStorage();
             }
 
@@ -95,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (e.target.classList.contains('deleteItem')) {
                     element.forEach((item, index) => {
                         if (indexBtn == index) {
-                            // console.log(indexBtn, index);
                             arrList.splice(index, 1);
                             saveLocalStorage();
                             item.remove();
@@ -120,9 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (e.target.classList.contains('crossOut')) {
                     arrList.forEach((itemArr, indexArr) => {
                         if (indexBtn == indexArr) {
+                           
                             itemArr.status = true
                             element[indexArr].classList.add('lineThrough');
                             saveLocalStorage();
+                            // location.reload();
 
                         }
                     });
@@ -134,11 +150,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     render();
     addItem();
+    crosOut();
 
 });
 
 
-//сортировку при нажатии на crosOut
 
 
 

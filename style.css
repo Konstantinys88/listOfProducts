@@ -74,6 +74,7 @@ body {
 }
 
 .input__list {
+    margin: 10px;
     width: 300px;
     padding: 15px;
     border: 2px black solid;
@@ -82,6 +83,7 @@ body {
 
 .button__list {
     padding: 15px;
+    margin: 10px;
     border: 2px black solid;
     border-radius: 10px;
     cursor: pointer;
