@@ -37,9 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const elemementLi = document.createElement('li');
                 elemementLi.classList.add('list__li');
-                elemementLi.textContent = item.text;
+                // elemementLi.textContent = item.text;
 
-                let width = item.text.length * 7.5;
+                const inputText = item.text.substring(0, 22) + '...';
+
+                const paragraph = document.createElement('p');
+                paragraph.classList.add('paragraph');
+                elemementLi.append(paragraph);
+                paragraph.textContent = inputText;
+
+                let width = inputText.length * 7.5;
 
                 const btnDelete = document.createElement('button');
                 btnDelete.textContent = 'Удалить';
@@ -62,6 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const parentElement = document.querySelector('.list__ul');
                 parentElement.append(elemementLi);
+           
+
+
+
             });
         } else {
             const elemementLi = document.createElement('li');

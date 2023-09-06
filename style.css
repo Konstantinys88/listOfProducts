@@ -53,8 +53,9 @@ body {
     border: 2px black solid;
     border-radius: 10px;
     cursor: pointer;
+    color: black;
 
-    right: 30px;
+    right: 10px;
 }
 
 .crossOut {
@@ -66,8 +67,9 @@ body {
     border: 2px black solid;
     border-radius: 10px;
     cursor: pointer;
+    color: black;
 
-    right: 110px;
+    right: 80px;
 }
 
 
@@ -109,4 +111,10 @@ body {
     top: 19px;
     opacity: 0;
 
+}
+
+.paragraph {
+    max-width: 190px;
+    overflow: hidden;
+    /* overflow-wrap: anywhere; */
 }
