@@ -39,9 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 elemementLi.classList.add('list__li');
                 elemementLi.textContent = item.text;
 
-                if (item.status) {
-                    elemementLi.classList.add('lineThrough');
-                }
+                let width = item.text.length * 7.5;
 
                 const btnDelete = document.createElement('button');
                 btnDelete.textContent = 'Удалить';
@@ -52,6 +50,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnCrosOut.textContent = 'Вычеркнуть';
                 btnCrosOut.classList.add('crossOut');
                 elemementLi.append(btnCrosOut);
+
+                const crosOutLine = document.createElement('span');
+                crosOutLine.classList.add('crosOutLine');
+                crosOutLine.style.width = `${width}px`;
+                elemementLi.append(crosOutLine);
+
+                if (item.status) {
+                    crosOutLine.style.opacity = 1;
+                }
 
                 const parentElement = document.querySelector('.list__ul');
                 parentElement.append(elemementLi);
@@ -67,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         deleteItem();
         crosOut();
-
     }
 
     /**
@@ -140,8 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (indexBtn == indexArr) {
                            
                             itemArr.status = true
-                            element[indexArr].classList.add('lineThrough');
-
+            
                             sortArr();
                             saveLocalStorage();
 

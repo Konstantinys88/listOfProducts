@@ -40,7 +40,7 @@ body {
     margin-top: 3px;
     position: relative;
     text-align: left;
-    height: 40px;
+    min-height: 40px;
     
 }
 
@@ -100,9 +100,13 @@ body {
     }
 }
 
-.lineThrough {
-    text-decoration: 2px line-through;
-    text-decoration-color: red;
-    /* text-decoration-style: wavy; */
+
+.crosOutLine {
+    display: block;
+    height: 2px;
+    background-color:black;
+    position: absolute;
+    top: 19px;
+    opacity: 0;
 
 }
