@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+
     let arrList = [];
 
     /**
@@ -16,30 +17,50 @@ document.addEventListener('DOMContentLoaded', () => {
         arrList = JSON.parse(localStorage.getItem("arrList"));
     }
 
+    /**
+     * перемещает вычеркнутые елементы в конец списка
+     */
     function sortArr() {
         arrList.forEach((item, index) => {
             if (item.status) {
                 arrList.push(item);
                 arrList.splice(index, 1);
-                // console.log(arrList)
-            }
-        })
+            } 
+        });
     }
 
     sortArr();
 
     /**
+     * выводит количество записей в списке
+     */
+    function listTitleRender() {
+        const listTitle = document.querySelector('.list__title');
+        if(arrList.length === 0) {
+            listTitle.textContent = 'Ваш список пуст.';
+        } else if(arrList.length === 1) {
+            listTitle.textContent = `В вашем списке ${arrList.length} запись`;  
+        } else if(arrList.length > 1 && arrList.length < 5) {
+            listTitle.textContent = `В вашем списке ${arrList.length} записи`;  
+        } else if(arrList.length > 4) {
+            listTitle.textContent = `В вашем списке ${arrList.length} записей`;  
+        }
+  
+    }
+
+    listTitleRender();
+
+    /**
      * Функция отрисовывает элементы из массива в виде списка на страницу
      */
     function render() {
-        if (arrList.length > 0) {
             arrList.forEach((item, index) => {
 
                 const elemementLi = document.createElement('li');
                 elemementLi.classList.add('list__li');
                 // elemementLi.textContent = item.text;
 
-                const inputText = item.text.substring(0, 20) + '...';
+                const inputText = item.text.substring(0, 18) + '...';
 
                 const paragraph = document.createElement('p');
                 paragraph.classList.add('paragraph');
@@ -72,30 +93,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const parentElement = document.querySelector('.list__ul');
                 parentElement.append(elemementLi);
-           
-
-
 
             });
-        } else {
-            const elemementLi = document.createElement('li');
-            elemementLi.classList.add('list__li');
-            elemementLi.textContent = 'Список пуст ☹';
 
-            const parentElement = document.querySelector('.list__ul');
-            parentElement.append(elemementLi);
-        }
 
         deleteItem();
         crosOut();
+        deliteList();
     }
+
 
     /**
      * Функция для добавления элемента
      */
     function addItem() {
         const input = document.querySelector('.input__list');
-        const btn = document.querySelector('.button__list'); 
+        const btn = document.querySelector('.button__list');
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const element = document.querySelectorAll('.list__li');
@@ -113,7 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 saveLocalStorage();
             }
 
-            render(arrList);
+            listTitleRender();
+            render();
             input.value = '';
         });
     }
@@ -134,13 +148,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             arrList.splice(index, 1);
                             saveLocalStorage();
                             item.remove();
+                            listTitleRender();
                         }
                     });
-
-                    if(arrList.length == 0) {
+                    if (arrList.length == 0) {
                         render();
                     }
-                    
                 }
             });
         });
@@ -166,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             } else {
                                 itemArr.status = true;
                             }
-                           
+
                             sortArr();
                             saveLocalStorage();
 
@@ -181,9 +194,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    /**
+     * Очищает весь список
+     */
+    function deliteList() {
+        const element = document.querySelectorAll('.list__li');
+        const btnDeliteList = document.querySelector('.button__deliteList');
+
+        btnDeliteList.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (e.target.classList.contains('button__deliteList')) {
+                arrList.splice(0, arrList.length)
+                element.forEach(item => item.remove());
+            }
+
+            listTitleRender();
+            saveLocalStorage();  
+        });   
+    }
+
+
     render();
     addItem();
-
+ 
 });
 
 
