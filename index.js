@@ -65,6 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (item.status) {
                     crosOutLine.style.opacity = 1;
+                    btnCrosOut.textContent = 'Вернуть';
+                } else {
+                    btnCrosOut.textContent = 'Вычеркнуть';
                 }
 
                 const parentElement = document.querySelector('.list__ul');
@@ -131,11 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             arrList.splice(index, 1);
                             saveLocalStorage();
                             item.remove();
-                            if (element.length == 0) {
-                                render();
-                            }
                         }
                     });
+
+                    if(arrList.length == 0) {
+                        render();
+                    }
+                    
                 }
             });
         });
@@ -155,9 +160,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (e.target.classList.contains('crossOut')) {
                     arrList.forEach((itemArr, indexArr) => {
                         if (indexBtn == indexArr) {
+
+                            if (itemArr.status) {
+                                itemArr.status = false;
+                            } else {
+                                itemArr.status = true;
+                            }
                            
-                            itemArr.status = true
-            
                             sortArr();
                             saveLocalStorage();
 
