@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 elemementLi.classList.add('list__li');
                 // elemementLi.textContent = item.text;
 
-                const inputText = item.text.substring(0, 22) + '...';
+                const inputText = item.text.substring(0, 20) + '...';
 
                 const paragraph = document.createElement('p');
                 paragraph.classList.add('paragraph');
